@@ -1,5 +1,6 @@
 package com.ling.key_manage.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ling.key_manage.entity.Permission;
 import com.ling.key_manage.service.PermissionService;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class PermissionController {
         return ResponseEntity.ok(permissions);
     }
 
-    @PostMapping
+    @PostMapping("validation")
     public ResponseEntity check(@RequestBody Permission permission) {
         if (service.check(permission.getKeyId(), permission.getUserId()))
             return ResponseEntity.status(HttpStatus.OK).body("用户有权限");
