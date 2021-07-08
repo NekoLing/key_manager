@@ -29,4 +29,25 @@ public class PermissionController {
         else
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("用户无权限");
     }
+    
+    @PostMapping
+    public ResponseEntity insert(@RequestBody Permission permission){
+       boolean result= service.save(permission);
+       if(result){
+           return ResponseEntity.ok("新建密钥策略成功");
+       }
+       else
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("新建密钥策略失败");
+    }
+
+    @DeleteMapping
+    public ResponseEntity delete(@RequestBody Permission permission){
+        QueryWrapper<Permission> queryWrapper = new QueryWrapper<>(permission);
+        boolean result=service.remove(queryWrapper);
+        if(result) {
+            return ResponseEntity.ok("删除成功");
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("删除失败");
+        }
+    }
 }
