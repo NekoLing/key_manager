@@ -6,7 +6,6 @@ import com.ling.key_manage.service.KeyService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.bc.sm4.SM4Key;
 import java.util.List;
 
 @RestController
@@ -40,15 +39,7 @@ public class KeyController {
     @PostMapping("key")
     public ResponseEntity insert(@RequestBody Key paramKey){
         String keyName = paramKey.getName();
-        Key key = new Key();
-        key.setName(keyName);
-        try {
-            String keyData = SM4Key.generateKey();
-            key.setData(keyData);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        Key key = keyService.creatKey(keyName);
         boolean result = keyService.save(key);
         if(result == true) {
             return ResponseEntity.ok("新建密钥成功");
