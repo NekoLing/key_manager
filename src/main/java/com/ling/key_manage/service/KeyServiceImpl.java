@@ -9,12 +9,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KeyServiceImpl extends ServiceImpl<KeyMapper, Key> implements KeyService{
-    final
-    PermissionServiceImpl permissionService;
-
-    public KeyServiceImpl(PermissionServiceImpl permissionService) {
-        this.permissionService = permissionService;
-    }
 
     //根据密钥名获取密钥，如果对应密钥不存在则返回null
     @Override
