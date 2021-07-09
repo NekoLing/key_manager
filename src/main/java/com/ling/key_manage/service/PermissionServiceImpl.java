@@ -56,8 +56,8 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
             users = new ArrayList<>();
 
             //如果用户集为空，则不显示这个密钥
-            if (permissions.isEmpty())
-                continue;
+//            if (permissions.isEmpty())
+//                continue;
 
             for (Permission permission : permissions) {
                 users.add(userService.getById(permission.getUserId().longValue()));
