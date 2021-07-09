@@ -25,5 +25,11 @@ class KeyManageApplicationTests {
 
     @Test
     void contextLoads() {
+        User user;
+        for (int i = 1; i < 10; i++) {
+            user = new User();
+            user.setName("用户" + i);
+            userService.save(user);
+        }
     }
 }
