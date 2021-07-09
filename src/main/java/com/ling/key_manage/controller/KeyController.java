@@ -42,7 +42,7 @@ public class KeyController {
         Key key = keyService.creatKey(keyName);
         boolean result = keyService.save(key);
         if(result == true) {
-            return ResponseEntity.ok("新建密钥成功");
+            return ResponseEntity.ok(key.getId());
         }else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("新建密钥失败");
         }
