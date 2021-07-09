@@ -17,7 +17,8 @@ public class UserController {
 
     public UserController(UserService userService) { this.userService = userService; }
 
-    public ResponseEntity getAllKeys() {
+    @GetMapping
+    public ResponseEntity getAllUser() {
         List<User> users = userService.list();
         return ResponseEntity.ok(users);
     }
