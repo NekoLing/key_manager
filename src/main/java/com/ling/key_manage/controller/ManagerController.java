@@ -22,9 +22,9 @@ public class ManagerController {
     public ResponseEntity checkLogin(@RequestBody Manager manager){
 
        if (managerService.Login(manager.getName(), manager.getPassword()))
-           return ResponseEntity.ok("登录成功");
+           return ResponseEntity.ok("{\"result\":\" 登录成功 \"}");
        else
-           return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("登陆失败");
+           return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("{\"result\":\" 登录失败失败 \"}");
 
    }
 

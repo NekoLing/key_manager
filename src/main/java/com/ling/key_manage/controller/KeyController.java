@@ -33,7 +33,7 @@ public class KeyController {
         if (key != null)
             return ResponseEntity.ok(key);
         else
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("未找到指定密钥");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"result\":\" 未找到指定密钥 \"}");
     }
 
     @PostMapping("key")
@@ -41,10 +41,10 @@ public class KeyController {
         String keyName = paramKey.getName();
         Key key = keyService.creatKey(keyName);
         boolean result = keyService.save(key);
-        if(result == true) {
-            return ResponseEntity.ok(key.getId());
+        if(result) {
+            return ResponseEntity.ok(key);
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("新建密钥失败");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"result\":\" 新建密钥失败 \"}");
         }
     }
 
@@ -52,10 +52,10 @@ public class KeyController {
     public ResponseEntity deleteById(@RequestBody Key paramKey){
         long id = paramKey.getId();
         boolean result = keyService.removeById(id);
-        if(result == true) {
-            return ResponseEntity.ok("删除成功");
+        if(result) {
+            return ResponseEntity.ok("{\"result\":\" 删除成功 \"}");
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("删除失败");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"result\":\" 删除失败 \"}");
         }
     }
 
@@ -65,10 +65,10 @@ public class KeyController {
         Key key = keyService.getById(id);
         paramKey.setData(key.getData());
         boolean result = keyService.updateById(paramKey);
-        if(result == true) {
-            return ResponseEntity.ok("修改成功");
+        if(result) {
+            return ResponseEntity.ok("{\"result\":\" 修改成功 \"}");
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("修改失败");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"result\":\" 修改失败 \"}");
         }
     }
 

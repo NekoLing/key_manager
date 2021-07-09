@@ -26,19 +26,19 @@ public class PermissionController {
     @PostMapping("validation")
     public ResponseEntity check(@RequestBody Permission permission) {
         if (service.check(permission.getKeyId(), permission.getUserId()))
-            return ResponseEntity.status(HttpStatus.OK).body("用户有权限");
+            return ResponseEntity.status(HttpStatus.OK).body("{\"result\":\" 用户有权限 \"}");
         else
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("用户无权限");
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("{\"result\":\" 用户无权限 \"}");
     }
     
     @PostMapping
     public ResponseEntity insert(@RequestBody Permission permission){
        boolean result= service.save(permission);
        if(result){
-           return ResponseEntity.ok("新建密钥策略成功");
+           return ResponseEntity.ok("{\"result\":\" 新建密钥策略成功 \"}");
        }
        else
-           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("新建密钥策略失败");
+           return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"result\":\" 新建密钥策略失败 \"}");
     }
 
     @DeleteMapping
@@ -46,9 +46,9 @@ public class PermissionController {
         QueryWrapper<Permission> queryWrapper = new QueryWrapper<>(permission);
         boolean result=service.remove(queryWrapper);
         if(result) {
-            return ResponseEntity.ok("删除成功");
+            return ResponseEntity.ok("{\"result\":\" 删除成功 \"}");
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("删除失败");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"result\":\" 删除失败 \"}");
         }
     }
 }
