@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("permission")
 public class PermissionController {
@@ -24,8 +26,8 @@ public class PermissionController {
     }
 
     @PostMapping("validation")
-    public ResponseEntity check(@RequestBody Permission permission) {
-        if (service.check(permission.getKeyId(), permission.getUserId()))
+    public ResponseEntity check(@RequestBody Map<String, String> permission) {
+        if (service.checkByName(permission.get("keyName"), permission.get("userName")))
             return ResponseEntity.status(HttpStatus.OK).body("{\"result\":\" 用户有权限 \"}");
         else
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("{\"result\":\" 用户无权限 \"}");

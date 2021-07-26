@@ -35,6 +35,16 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
         return permission != null;
     }
 
+    @Override
+    public boolean checkByName(String keyName, String userName) {
+        QueryWrapper<Permission> queryWrapper = new QueryWrapper<>();
+        Key key = keyService.getByName(keyName);
+        User user = userService.getByName(userName);
+        queryWrapper.eq("key_id", key.getId().longValue()).eq("user_id", user.getId().longValue());
+        Permission permission = getOne(queryWrapper);
+        return permission != null;
+    }
+
 
     //返回需要结构的Json对象 也就是密钥视角对应有权限的所有用户
     @Override
